@@ -1,0 +1,9 @@
+# Ignore lazy-lock.json as it's auto-generated
+nvim/lazy-lock.json
+
+# Ignore any backup files
+*.backup.*
+
+# Ignore OS files
+.DS_Store
+Thumbs.db
