@@ -1,6 +1,5 @@
-# My Dotfiles
-
-Comprehensive personal configuration files for development setup.
+# Dotfiles
+Personal configuration files for development setup.
 
 ## What's included
 
@@ -41,10 +40,6 @@ Comprehensive personal configuration files for development setup.
    # macOS
    brew install neovim
    
-   # Ubuntu/Debian
-   sudo apt install neovim
-   ```
-
 4. Open Neovim to automatically install plugins:
    ```bash
    nvim
