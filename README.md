@@ -1,14 +1,27 @@
 # My Dotfiles
 
-Personal configuration files for development setup.
+Comprehensive personal configuration files for development setup.
 
 ## What's included
 
+### Terminal & Shell
+- **Ghostty**: Modern terminal emulator configuration
+- **Fish**: Shell configuration with custom functions
+- **Zsh**: Alternative shell setup
+- **Starship**: Cross-shell prompt configuration
+- **Tmux**: Terminal multiplexer with custom keybindings
+
+### Development Tools  
 - **Neovim**: Complete NvChad configuration with custom settings
   - Persistent undo with undotree support
   - Custom folding configuration  
   - TreeSitter integration
   - All plugins managed by Lazy.nvim
+- **Git**: Global git configuration
+
+### System Management
+- **Yabai**: Tiling window manager configuration
+- **SKHD**: Keyboard shortcuts daemon
 
 ## Installation
 

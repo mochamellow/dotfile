@@ -1,22 +1,50 @@
 #!/bin/bash
 
-# Dotfiles installation script
+# Comprehensive Dotfiles Installation Script
 
-echo "Setting up dotfiles..."
+echo "🚀 Setting up dotfiles..."
 
 # Create necessary directories
 mkdir -p ~/.config
 mkdir -p ~/.nvim/undodir
 
-# Backup existing configs
-if [ -d ~/.config/nvim ]; then
-    echo "Backing up existing nvim config..."
-    mv ~/.config/nvim ~/.config/nvim.backup.$(date +%Y%m%d_%H%M%S)
-fi
+# Function to backup existing configs
+backup_if_exists() {
+    if [ -e "$1" ]; then
+        echo "📦 Backing up existing $1..."
+        mv "$1" "$1.backup.$(date +%Y%m%d_%H%M%S)"
+    fi
+}
 
-# Install Neovim config
-echo "Installing Neovim config..."
-cp -r nvim ~/.config/
+# Install ~/.config files
+echo "📁 Installing config files..."
+for config in config/*; do
+    if [ -d "$config" ] || [ -f "$config" ]; then
+        config_name=$(basename "$config")
+        backup_if_exists ~/.config/"$config_name"
+        cp -r "$config" ~/.config/
+        echo "  ✅ Installed $config_name"
+    fi
+done
 
-echo "Dotfiles installation complete!"
-echo "Open nvim to install plugins automatically via Lazy.nvim"
+# Install home directory files  
+echo "🏠 Installing home directory files..."
+for file in home/.*; do
+    if [ -f "$file" ]; then
+        filename=$(basename "$file")
+        backup_if_exists ~/"$filename"
+        cp "$file" ~/
+        echo "  ✅ Installed $filename"
+    fi
+done
+
+echo ""
+echo "🎉 Dotfiles installation complete!"
+echo ""
+echo "📋 Next steps:"
+echo "  1. Restart your terminal or run: source ~/.zshrc"
+echo "  2. Open nvim to install plugins automatically"
+echo "  3. If using tmux, restart tmux sessions: tmux kill-server"
+echo "  4. If using yabai/skhd, restart the services"
+echo ""
+echo "⚡ Your development environment is ready!"
