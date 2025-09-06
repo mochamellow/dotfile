@@ -1,4 +1,4 @@
-require "nvchad.mappings"
+require("nvchad.mappings")
 
 -- add yours here
 local map = vim.keymap.set
@@ -32,60 +32,60 @@ map("n", "N", "Nzzzv")
 
 -- Replace Telescope file finding
 map("n", "<leader>ff", function()
-  require("snacks").picker.files { layout = "select" }
+	require("snacks").picker.files({ layout = "select" })
 end, { desc = "Find Files" })
 
 map("n", "<leader>fA", function()
-  require("snacks").picker.files { hidden = true, no_ignore = true }
+	require("snacks").picker.files({ hidden = true, no_ignore = true })
 end, { desc = "Find All Files" })
 
 -- Replace Telescope live grep
 map("n", "<leader>fw", function()
-  require("snacks").picker.grep { layout = "sidebar" }
+	require("snacks").picker.grep({ layout = "sidebar" })
 end, { desc = "Live Grep" })
 
 -- Replace Telescope buffers
 map("n", "<leader>fb", function()
-  require("snacks").picker.buffers { layout = "select" }
+	require("snacks").picker.buffers({ layout = "select" })
 end, { desc = "Find Buffers" })
 
 -- Replace Telescope help tags
 map("n", "<leader>fh", function()
-  require("snacks").picker.help()
+	require("snacks").picker.help()
 end, { desc = "Help Tags" })
 
 -- Replace Telescope marks
 map("n", "<leader>ma", function()
-  require("snacks").picker.marks()
+	require("snacks").picker.marks()
 end, { desc = "Find Marks" })
 
 -- Replace Telescope oldfiles
 map("n", "<leader>fr", function()
-  require("snacks").picker.recent()
+	require("snacks").picker.recent()
 end, { desc = "Find Recent Files" })
 
 -- Replace Telescope current buffer fuzzy find
 map("n", "<leader>fn", function()
-  require("snacks").picker.lines()
+	require("snacks").picker.lines()
 end, { desc = "Find in Current Buffer" })
 
 map("n", "<C-f>", function()
-  require("snacks").picker.lines()
+	require("snacks").picker.lines()
 end, { desc = "Find in Current Buffer" })
 
 -- Replace Telescope git commits
 map("n", "<leader>cm", function()
-  require("snacks").picker.git_log()
+	require("snacks").picker.git_log()
 end, { desc = "Git Commits" })
 
 -- Replace Telescope git status
 map("n", "<leader>gt", function()
-  require("snacks").picker.git_status()
+	require("snacks").picker.git_status()
 end, { desc = "Git Status" })
 
 -- Replace Telescope terms (approximate with recent files)
 map("n", "<leader>pt", function()
-  require("snacks").picker.files { cwd = vim.fn.stdpath "data" .. "/lazy" }
+	require("snacks").picker.files({ cwd = vim.fn.stdpath("data") .. "/lazy" })
 end, { desc = "Pick Hidden Term (Plugin Files)" })
 
 -- ===========================================
@@ -94,26 +94,26 @@ end, { desc = "Pick Hidden Term (Plugin Files)" })
 
 -- Toggle word detection highlighting
 map("n", "<leader>tw", function()
-  require("snacks").words.toggle()
+	require("snacks").words.toggle()
 end, { desc = "Toggle Word Detection" })
 
 -- LazyGit integration (if you want it)
 map("n", "<leader>gg", function()
-  require("snacks").lazygit()
-end, { desc = "Open LazyGit" })
+	require("neogit").open({ kind = "floating" })
+end, { desc = "Open Neogit" })
 
 -- Snacks notification history
 map("n", "<leader>nh", function()
-  require("snacks").notifier.show_history()
+	require("snacks").notifier.show_history()
 end, { desc = "Notification History" })
 
 -- Dismiss all notifications
 map("n", "<leader>nd", function()
-  require("snacks").notifier.hide()
+	require("snacks").notifier.hide()
 end, { desc = "Dismiss Notifications" })
 
 map("n", "<leader>ut", function()
-  require("snacks").toggle.zen():map "<leader>uz"
+	require("snacks").toggle.zen():map("<leader>uz")
 end, { desc = "Toggle zen mode" })
 
 -- ================================
@@ -134,3 +134,6 @@ map("n", "<leader>is", "<cmd>Fidget suppress<cr>", { desc = "Fidget: Suppress no
 map("n", "<leader>il", "<cmd>Fidget lsp_suppress<cr>", { desc = "Fidget: Suppress LSP progress" })
 
 map("n", "<leader>uu", "<cmd>lua require('undotree').toggle()<cr>", { desc = "Toggle Undo Tree" })
+
+-- Vertical split (to the right)
+vim.keymap.set("n", "<C-\\>", ":vsplit<CR>", { noremap = true, silent = true })
