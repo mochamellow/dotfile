@@ -69,6 +69,18 @@ If you prefer manual installation:
 
 To update your dotfiles:
 
-1. Make changes to your actual config files
-2. Copy them back: `cp -r ~/.config/nvim/* ./nvim/`
-3. Commit and push changes
+1. Run the update script: `./update.sh`
+2. Review and commit changes: `git add . && git commit -m 'Update configs'`
+3. Push to GitHub: `git push`
+
+## Troubleshooting
+
+### Undotree ns_id: -1 Error
+
+If you get `ns_id: -1` errors with undotree after reinstalling plugins:
+
+```bash
+./fix_undotree.sh
+```
+
+This happens because Lazy.nvim reinstalls plugins fresh from GitHub, overwriting our fix.
