@@ -1,17 +1,46 @@
 -- configs/lspconfig.lua
 local M = {}
 
+-- Custom on_attach function with Glance mappings
+local function custom_on_attach(_, bufnr)
+  local function opts(desc)
+    return { buffer = bufnr, desc = "LSP " .. desc, noremap = true, silent = true }
+  end
+
+  -- Use Glance for these LSP actions
+  vim.keymap.set("n", "gD", "<CMD>Glance definitions<CR>", opts("Glance definitions"))
+  vim.keymap.set("n", "gR", "<CMD>Glance references<CR>", opts("Glance references"))
+  vim.keymap.set("n", "gY", "<CMD>Glance type_definitions<CR>", opts("Glance type definitions"))
+  vim.keymap.set("n", "gM", "<CMD>Glance implementations<CR>", opts("Glance implementations"))
+  
+  -- Keep some NvChad defaults
+  vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts("Go to definition"))
+  vim.keymap.set("n", "gT", vim.lsp.buf.declaration, opts("Go to declaration"))
+  vim.keymap.set("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, opts("Add workspace folder"))
+  vim.keymap.set("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, opts("Remove workspace folder"))
+  vim.keymap.set("n", "<leader>wl", function()
+    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+  end, opts("List workspace folders"))
+  vim.keymap.set("n", "<leader>D", vim.lsp.buf.type_definition, opts("Go to type definition"))
+  vim.keymap.set("n", "<leader>ra", require "nvchad.lsp.renamer", opts("NvRenamer"))
+end
+
 function M.setup(opts)
-  -- Load NvChad defaults (on_attach, capabilities, etc.)
-  require("nvchad.configs.lspconfig").defaults()
+  -- Load NvChad defaults for capabilities and other settings
+  local nvchad_config = require("nvchad.configs.lspconfig")
+  
+  -- Load base configuration but skip the default on_attach
+  dofile(vim.g.base46_cache .. "lsp")
+  require("nvchad.lsp").diagnostic_config()
 
   local lspconfig = require "lspconfig"
 
-  -- Merge default config with user config
+  -- Merge default config with user config, using our custom on_attach
   local function setup_server(name, config)
     lspconfig[name].setup(vim.tbl_deep_extend("force", {
-      on_attach = require("nvchad.configs.lspconfig").on_attach,
-      capabilities = require("nvchad.configs.lspconfig").capabilities,
+      on_attach = custom_on_attach,  -- Use our custom function
+      capabilities = nvchad_config.capabilities,
+      on_init = nvchad_config.on_init,
     }, config or {}))
   end
 

@@ -6,6 +6,13 @@ require "nvchad.options"
 vim.opt.number = true -- Show absolute line numbers
 vim.opt.relativenumber = true -- Show relative line numbers
 
+-- SMART WORD WRAPPING SETTINGS (overrides init.lua)
+vim.opt.wrap = true           -- Enable line wrapping (overrides init.lua's false)
+vim.opt.linebreak = true      -- Break at word boundaries, not mid-word
+vim.opt.breakindent = true    -- Maintain indentation on wrapped lines
+vim.opt.showbreak = "↪ "      -- Visual indicator for wrapped lines (optional)
+vim.opt.breakat = " ^I!@*-+;:,./?"  -- Characters where line breaks are allowed
+
 -- DEFAULT INDENTATION (guess-indent will override per-file)
 -- Set good defaults that guess-indent can fall back to
 vim.opt.tabstop = 4        -- Default tab width

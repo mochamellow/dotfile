@@ -170,3 +170,8 @@ map("n", "<leader>uu", "<cmd>lua require('undotree').toggle()<cr>", { desc = "To
 
 -- Vertical split (to the right)
 vim.keymap.set("n", "<C-\\>", ":vsplit<CR>", { noremap = true, silent = true })
+
+-- ================================
+-- GLANCE LSP NAVIGATION
+-- ================================
+-- Note: Glance mappings are now handled in configs/lspconfig.lua

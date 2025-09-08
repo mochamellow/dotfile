@@ -1,4 +1,4 @@
-	return {
+return {
 	{
 		"stevearc/conform.nvim",
 		-- event = 'BufWritePre', -- uncomment for format on save
@@ -499,6 +499,7 @@
 	},
 	{
 		"dnlhc/glance.nvim",
+		event = "VeryLazy",
 		cmd = "Glance",
 	},
 	{
@@ -574,12 +575,23 @@
 				range = { 1, 200 }, -- Check first 200 lines for pattern
 				-- Exclude certain filetypes from detection
 				filetype_exclude = {
-					"help", "dashboard", "lazy", "mason", "notify", "toggleterm",
-					"undotree", "diff", "qf", "gitcommit"
+					"help",
+					"dashboard",
+					"lazy",
+					"mason",
+					"notify",
+					"toggleterm",
+					"undotree",
+					"diff",
+					"qf",
+					"gitcommit",
 				},
 				-- Exclude certain buffer types
 				buftype_exclude = {
-					"help", "nofile", "terminal", "prompt"
+					"help",
+					"nofile",
+					"terminal",
+					"prompt",
 				},
 			})
 		end,
