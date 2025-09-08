@@ -1,4 +1,4 @@
-return {
+	return {
 	{
 		"stevearc/conform.nvim",
 		-- event = 'BufWritePre', -- uncomment for format on save
@@ -558,5 +558,30 @@ return {
 			"sindrets/diffview.nvim",
 			"folke/snacks.nvim",
 		},
+	},
+	{
+		"nmac427/guess-indent.nvim",
+		event = "BufReadPre", -- Load earlier for better detection
+		config = function()
+			require("guess-indent").setup({
+				-- Auto-detect indentation on file open
+				auto_cmd = true,
+				-- Override editorconfig if detected indentation differs
+				override_editorconfig = true,
+				-- Default to 4 spaces when detection fails
+				default_tab_width = 4,
+				-- More aggressive detection
+				range = { 1, 200 }, -- Check first 200 lines for pattern
+				-- Exclude certain filetypes from detection
+				filetype_exclude = {
+					"help", "dashboard", "lazy", "mason", "notify", "toggleterm",
+					"undotree", "diff", "qf", "gitcommit"
+				},
+				-- Exclude certain buffer types
+				buftype_exclude = {
+					"help", "nofile", "terminal", "prompt"
+				},
+			})
+		end,
 	},
 }

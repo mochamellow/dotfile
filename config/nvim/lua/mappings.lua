@@ -7,6 +7,39 @@ local map = vim.keymap.set
 map("i", "jk", "<ESC>")
 
 -- ================================
+-- SNIPPET NAVIGATION
+-- ================================
+
+-- Additional snippet navigation keybinds (Ctrl+j/k) - mirrors Tab/Shift+Tab behavior
+map({ "i", "s" }, "<C-j>", function()
+	local cmp = require("cmp")
+	local luasnip = require("luasnip")
+
+	if cmp.visible() then
+		cmp.select_next_item()
+	elseif luasnip.expand_or_jumpable() then
+		luasnip.expand_or_jump()
+	else
+		-- Fallback to original Ctrl+j behavior
+		vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-j>", true, false, true), "n", false)
+	end
+end, { desc = "CMP: Next item or LuaSnip: Jump forward" })
+
+map({ "i", "s" }, "<C-k>", function()
+	local cmp = require("cmp")
+	local luasnip = require("luasnip")
+
+	if cmp.visible() then
+		cmp.select_prev_item()
+	elseif luasnip.jumpable(-1) then
+		luasnip.jump(-1)
+	else
+		-- Fallback to original Ctrl+k behavior
+		vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-k>", true, false, true), "n", false)
+	end
+end, { desc = "CMP: Prev item or LuaSnip: Jump backward" })
+
+-- ================================
 -- VIM CONFIGURATION & OPTIMIZATION
 -- ================================
 
