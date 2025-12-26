@@ -1,47 +1,6 @@
-require("nvchad.mappings")
+require "nvchad.mappings"
 
--- add yours here
 local map = vim.keymap.set
-
--- map("n", ";", ":", { desc = "CMD enter command mode" })
-map("i", "jk", "<ESC>")
-
--- ================================
--- SNIPPET NAVIGATION
--- ================================
-
--- Additional snippet navigation keybinds (Ctrl+j/k) - mirrors Tab/Shift+Tab behavior
-map({ "i", "s" }, "<C-j>", function()
-	local cmp = require("cmp")
-	local luasnip = require("luasnip")
-
-	if cmp.visible() then
-		cmp.select_next_item()
-	elseif luasnip.expand_or_jumpable() then
-		luasnip.expand_or_jump()
-	else
-		-- Fallback to original Ctrl+j behavior
-		vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-j>", true, false, true), "n", false)
-	end
-end, { desc = "CMP: Next item or LuaSnip: Jump forward" })
-
-map({ "i", "s" }, "<C-k>", function()
-	local cmp = require("cmp")
-	local luasnip = require("luasnip")
-
-	if cmp.visible() then
-		cmp.select_prev_item()
-	elseif luasnip.jumpable(-1) then
-		luasnip.jump(-1)
-	else
-		-- Fallback to original Ctrl+k behavior
-		vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-k>", true, false, true), "n", false)
-	end
-end, { desc = "CMP: Prev item or LuaSnip: Jump backward" })
-
--- ================================
--- VIM CONFIGURATION & OPTIMIZATION
--- ================================
 
 map("i", "<Del>", "<C-o>x", { noremap = true, desc = "Delete char under cursor" })
 map("i", "<M-BS>", "<C-w>", { noremap = true, desc = "Delete word backwards" })
@@ -59,119 +18,38 @@ map("n", "<C-u>", "<C-u>zz")
 map("n", "n", "nzzzv")
 map("n", "N", "Nzzzv")
 
--- ===========================================
--- Override NvChad Telescope keybindings with Snacks picker
--- ===========================================
+-- Allow moving the cursor through wrapped lines with j, k, <Up> and <Down>
+map("n", "j", 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', { expr = true })
+map("n", "k", 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', { expr = true })
+map("n", "<Up>", 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', { expr = true })
+map("n", "<Down>", 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', { expr = true })
 
--- Replace Telescope file finding
-map("n", "<leader>ff", function()
-	require("snacks").picker.files({ layout = "select" })
-end, { desc = "Find Files" })
+-- Move lines up/down
+map("n", "<A-Down>", ":m .+1<CR>", { desc = "Move line down" })
+map("n", "<A-j>", ":m .+1<CR>", { desc = "Move line down" })
+map("n", "<A-Up>", ":m .-2<CR>", { desc = "Move line up" })
+map("n", "<A-k>", ":m .-2<CR>", { desc = "Move line up" })
+map("i", "<A-Down>", "<Esc>:m .+1<CR>==gi", { desc = "Move line down" })
+map("i", "<A-j>", "<Esc>:m .+1<CR>==gi", { desc = "Move line down" })
+map("i", "<A-Up>", "<Esc>:m .-2<CR>==gi", { desc = "Move line up" })
+map("i", "<A-k>", "<Esc>:m .-2<CR>==gi", { desc = "Move line up" })
+map("v", "<A-Down>", ":m '>+1<CR>gv=gv", { desc = "Move line down" })
+map("v", "<A-j>", ":m '>+1<CR>gv=gv", { desc = "Move line down" })
+map("v", "<A-Up>", ":m '<-2<CR>gv=gv", { desc = "Move line up" })
+map("v", "<A-k>", ":m '<-2<CR>gv=gv", { desc = "Move line up" })
 
-map("n", "<leader>fA", function()
-	require("snacks").picker.files({ hidden = true, no_ignore = true })
-end, { desc = "Find All Files" })
+-- Split Panes
+map("n", "<leader>sv", "<cmd>vsplit<cr>", { desc = "Split vertical" })
+map("n", "<leader>sh", "<cmd>split<cr>", { desc = "Split horizontal" })
+map("n", "<C-\\>", "<cmd>vsplit<cr>", { desc = "Split vertical" })
 
--- Replace Telescope live grep
-map("n", "<leader>fw", function()
-	require("snacks").picker.grep({ layout = "sidebar" })
-end, { desc = "Live Grep" })
+-- NvChad
+map("n", "<leader>th", function()
+  require("nvchad.themes").open { style = "flat" }
+end, { desc = "Open theme picker" })
 
--- Replace Telescope buffers
-map("n", "<leader>fb", function()
-	require("snacks").picker.buffers({ layout = "select" })
-end, { desc = "Find Buffers" })
-
--- Replace Telescope help tags
-map("n", "<leader>fh", function()
-	require("snacks").picker.help()
-end, { desc = "Help Tags" })
-
--- Replace Telescope marks
-map("n", "<leader>ma", function()
-	require("snacks").picker.marks()
-end, { desc = "Find Marks" })
-
--- Replace Telescope oldfiles
-map("n", "<leader>fr", function()
-	require("snacks").picker.recent()
-end, { desc = "Find Recent Files" })
-
--- Replace Telescope current buffer fuzzy find
-map("n", "<leader>fn", function()
-	require("snacks").picker.lines()
-end, { desc = "Find in Current Buffer" })
-
-map("n", "<C-f>", function()
-	require("snacks").picker.lines()
-end, { desc = "Find in Current Buffer" })
-
--- Replace Telescope git commits
-map("n", "<leader>cm", function()
-	require("snacks").picker.git_log()
-end, { desc = "Git Commits" })
-
--- Replace Telescope git status
-map("n", "<leader>gt", function()
-	require("snacks").picker.git_status()
-end, { desc = "Git Status" })
-
--- Replace Telescope terms (approximate with recent files)
-map("n", "<leader>pt", function()
-	require("snacks").picker.files({ cwd = vim.fn.stdpath("data") .. "/lazy" })
-end, { desc = "Pick Hidden Term (Plugin Files)" })
-
--- ===========================================
--- Additional Snacks Features Keybindings
--- ===========================================
-
--- Toggle word detection highlighting
-map("n", "<leader>tw", function()
-	require("snacks").words.toggle()
-end, { desc = "Toggle Word Detection" })
-
--- LazyGit integration (if you want it)
-map("n", "<leader>gg", function()
-	require("neogit").open({ kind = "floating" })
-end, { desc = "Open Neogit" })
-
--- Snacks notification history
-map("n", "<leader>nh", function()
-	require("snacks").notifier.show_history()
-end, { desc = "Notification History" })
-
--- Dismiss all notifications
-map("n", "<leader>nd", function()
-	require("snacks").notifier.hide()
-end, { desc = "Dismiss Notifications" })
-
-map("n", "<leader>ut", function()
-	require("snacks").toggle.zen():map("<leader>uz")
-end, { desc = "Toggle zen mode" })
-
--- ================================
--- Custom Fold Keybindings
--- ================================
-
--- Replace zi default function (toggle folding feature) with individual fold toggle
-map("n", "zi", "za", { desc = "Toggle fold" })
-
-vim.api.nvim_del_keymap("n", "<leader>ds")
-vim.keymap.del("n", "<leader>x")
-
--- Fidget keymaps
-map("n", "<leader>ic", "<cmd>Fidget clear<cr>", { desc = "Fidget: Clear active notifications" })
-map("n", "<leader>ih", "<cmd>Fidget history<cr>", { desc = "Fidget: Show notifications history" })
-map("n", "<leader>id", "<cmd>Fidget clear_history<cr>", { desc = "Fidget: Clear notifications history" })
-map("n", "<leader>is", "<cmd>Fidget suppress<cr>", { desc = "Fidget: Suppress notification window" })
-map("n", "<leader>il", "<cmd>Fidget lsp_suppress<cr>", { desc = "Fidget: Suppress LSP progress" })
-
-map("n", "<leader>uu", "<cmd>lua require('undotree').toggle()<cr>", { desc = "Toggle Undo Tree" })
-
--- Vertical split (to the right)
-vim.keymap.set("n", "<C-\\>", ":vsplit<CR>", { noremap = true, silent = true })
-
--- ================================
--- GLANCE LSP NAVIGATION
--- ================================
--- Note: Glance mappings are now handled in configs/lspconfig.lua
+-- Quick resize pane
+map("n", "<C-A-h>", "5<C-w>>", { desc = "Window increase width by 5" })
+map("n", "<C-A-l>", "5<C-w><", { desc = "Window decrease width by 5" })
+map("n", "<C-A-k>", "5<C-w>+", { desc = "Window increase height by 5" })
+map("n", "<C-A-j>", "5<C-w>-", { desc = "Window decrease height by 5" })
