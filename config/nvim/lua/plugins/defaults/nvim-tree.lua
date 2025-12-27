@@ -6,7 +6,7 @@ return {
   end,
   config = function()
     -- Load cached settings
-    dofile(vim.g.base46_cache .. "nvimtree")
+    vim.api.nvim_set_hl(0, "NvimTreeCursorLine", { link = "PmenuSbar" })
 
     local nvtree = require "nvim-tree"
     local api = require "nvim-tree.api"

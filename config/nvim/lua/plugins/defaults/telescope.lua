@@ -12,6 +12,8 @@ return {
     { "<leader>ff", desc = "Search" },
     { "<leader>fa", desc = "Search all files" },
     { "<leader>fw", desc = "Live Grep" },
+    { "<leader>fn", desc = "Telescope Notifications" },
+    { "<C-f>", desc = "Live Grep in current buffer" },
   },
 
   config = function(_, opts)
@@ -127,6 +129,20 @@ return {
     map("n", "<leader>fb", function()
       builtin.buffers { sort_lastused = true }
     end, { desc = "Buffers" })
+
+    -- Search in current buffer
+    map("n", "<C-f>", function()
+      require("telescope.builtin").current_buffer_fuzzy_find {
+        -- previewer = true,
+        -- layout_strategy = "vertical",
+        -- layout_config = {
+        --   vertical = {
+        --     width = SIZES.WIDTH,
+        --     height = 25,
+        --   },
+        -- },
+      }
+    end, { desc = "Fuzzy find in current buffer" })
 
     -- notify in telescope
     map("n", "<leader>fn", function()

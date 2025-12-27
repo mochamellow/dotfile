@@ -3,6 +3,12 @@ return {
   config = function(_, opts)
     local nvchad_config = require "nvchad.configs.lspconfig"
 
+    vim.filetype.add {
+      pattern = {
+        [".*%.component%.html"] = "htmlangular",
+      },
+    }
+
     -- Consolidated glance opener function
     local function open_glance(action)
       return function()
@@ -102,12 +108,10 @@ return {
           "svelte",
         },
       },
-      emmet_ls = {
+      emmet_language_server = {
         filetypes = {
           "html",
           "htmlangular",
-          "angularls",
-          "emmet_ls",
           "css",
           "scss",
           "javascriptreact",

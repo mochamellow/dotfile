@@ -69,6 +69,13 @@ return {
 
     ---@type cmp.ConfigSchema
     local custom_opts = {
+      sources = {
+        { name = "nvim_lsp", priority = 1000 },
+        { name = "luasnip", priority = 750 },
+        { name = "buffer", priority = 500 },
+        { name = "nvim_lua", priority = 500 },
+        { name = "path", priority = 250 },
+      },
       mapping = {
         ["<C-j>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
