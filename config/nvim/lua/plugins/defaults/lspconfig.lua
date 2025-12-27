@@ -107,6 +107,14 @@ return {
           "vue",
           "svelte",
         },
+        flags = {
+          debounce_text_changes = 200,
+        },
+        settings = {
+          tailwindCSS = {
+            experimental = { classRegex = {} },
+          },
+        },
       },
       emmet_language_server = {
         filetypes = {

@@ -44,4 +44,5 @@ return {
   { import = "plugins.package.menu" },
   { import = "plugins.package.minty" },
   { import = "plugins.package.markview" },
+  -- { import = "plugins.package.render-markdown" },
 }

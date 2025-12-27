@@ -26,7 +26,7 @@ Personal configuration files for development setup.
 1. Clone this repository:
 
    ```bash
-   git clone https://github.com/YOUR_USERNAME/dotfiles.git
+   git clone https://github.com/mochamellow/dotfiles.git
    cd dotfiles
    ```
 
