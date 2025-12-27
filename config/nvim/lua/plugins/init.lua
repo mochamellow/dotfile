@@ -43,4 +43,5 @@ return {
   { import = "plugins.package.volt" },
   { import = "plugins.package.menu" },
   { import = "plugins.package.minty" },
+  { import = "plugins.package.markview" },
 }

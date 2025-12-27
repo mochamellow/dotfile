@@ -29,7 +29,6 @@ done
 echo "🏠 Updating home directory files..."
 home_files=(
     ".gitconfig"
-    ".zshrc"
 )
 
 for file in "${home_files[@]}"; do
