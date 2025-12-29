@@ -1,9 +1,9 @@
 return {
   "nvim-tree/nvim-tree.lua",
-  enabled = true,
-  init = function()
-    vim.keymap.set("n", "<C-n>", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle NvimTree" })
-  end,
+  enabled = false,
+  -- init = function()
+  --   vim.keymap.set("n", "<C-n>", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle NvimTree" })
+  -- end,
   config = function()
     -- Load cached settings
     vim.api.nvim_set_hl(0, "NvimTreeCursorLine", { link = "PmenuSbar" })

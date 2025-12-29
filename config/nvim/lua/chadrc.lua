@@ -2,7 +2,7 @@
 local M = {}
 
 M.base46 = {
-  theme = "oh-lucy-evening",
+  theme = "bearded-arc",
 
   hl_override = {
     Comment = { italic = true },

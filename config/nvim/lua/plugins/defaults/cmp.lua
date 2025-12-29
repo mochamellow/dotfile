@@ -86,6 +86,10 @@ return {
     -- ─────────────────────────────────────────────
     local custom_opts = {
       enabled = function()
+        if vim.bo.buftype == "prompt" then
+          return false
+        end
+
         return not vim.b.cmp_disabled
       end,
 

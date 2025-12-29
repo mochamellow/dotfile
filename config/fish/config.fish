@@ -37,3 +37,11 @@ fnm env | source
 # Ruby gems setup (uncommented for proper Ruby gem support)
 set -gx GEM_HOME (brew --prefix)/lib/ruby/gems/(ruby -e "puts RUBY_VERSION[/\d+\.\d+/]")
 set -gx PATH $GEM_HOME/bin $PATH
+
+# alias
+alias lf "lfcd"
+alias gs "git status"
+alias gb "git branch"
+
+set -gx LS_COLORS "di=97"
+

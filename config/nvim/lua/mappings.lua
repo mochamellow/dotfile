@@ -2,6 +2,15 @@ require "nvchad.mappings"
 
 local map = vim.keymap.set
 
+-- Disabled nvimtreesitter for lf instead.
+map("n", "<C-n>", function()
+  local dir = vim.fn.expand "%:p:h"
+  if vim.fn.isdirectory(dir) == 0 then
+    dir = vim.fn.getcwd()
+  end
+  require("lf").start { dir = dir }
+end, { desc = "Toggle lf" })
+
 map("i", "<Del>", "<C-o>x", { noremap = true, desc = "Delete char under cursor" })
 map("i", "<M-BS>", "<C-w>", { noremap = true, desc = "Delete word backwards" })
 map("i", "<M-Del>", "<C-o>dw", { noremap = true, desc = "Delete word forwards" })
@@ -17,12 +26,6 @@ map("n", "<C-u>", "<C-u>zz")
 
 map("n", "n", "nzzzv")
 map("n", "N", "Nzzzv")
-
--- Allow moving the cursor through wrapped lines with j, k, <Up> and <Down>
-map("n", "j", 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', { expr = true })
-map("n", "k", 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', { expr = true })
-map("n", "<Up>", 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', { expr = true })
-map("n", "<Down>", 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', { expr = true })
 
 -- Move lines up/down
 map("n", "<A-Down>", ":m .+1<CR>", { desc = "Move line down" })

@@ -26,7 +26,6 @@ return {
   { import = "plugins.package.todo-comments" },
   { import = "plugins.package.trouble" },
   { import = "plugins.package.treesitter-textobjects" },
-  -- { import = "plugins.package.scrollbar" },
   { import = "plugins.package.spider" },
   { import = "plugins.package.glance" },
   { import = "plugins.package.tiny-inline-diagnostic" },
@@ -44,5 +43,5 @@ return {
   { import = "plugins.package.menu" },
   { import = "plugins.package.minty" },
   { import = "plugins.package.markview" },
-  -- { import = "plugins.package.render-markdown" },
+  { import = "plugins.package.lf" },
 }
