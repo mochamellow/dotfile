@@ -64,25 +64,11 @@ return {
     nvtree.setup {
       on_attach = custom_on_attach,
       view = {
-        float = {
-          enable = false,
-          quit_on_focus_loss = true,
-          open_win_config = function()
-            local columns = vim.o.columns
-            local lines = vim.o.lines
-            local width = math.max(math.floor(columns * 0.2), 36)
-            return {
-              relative = "editor",
-              border = "double",
-              width = width,
-              height = lines - 5,
-              row = 1,
-              col = 3,
-            }
-          end,
-        },
-        preserve_window_proportions = false,
+        signcolumn = "yes",
+        float = { enable = false },
+        cursorline = false,
       },
+      modified = { enable = true },
       actions = {
         open_file = {
           resize_window = true,
@@ -92,21 +78,48 @@ return {
         root_folder_label = function(path)
           return "    " .. vim.fn.fnamemodify(path, ":t")
         end,
+        indent_width = 3,
         icons = {
+          show = {
+            hidden = true,
+          },
+          git_placement = "after",
+          bookmarks_placement = "after",
+          symlink_arrow = " -> ",
           glyphs = {
-            default = "",
             folder = {
+              arrow_closed = " ",
+              arrow_open = " ",
               default = "",
               open = "",
               empty = "",
               empty_open = "",
+              symlink = "",
+              symlink_open = "",
+            },
+            default = "󱓻",
+            symlink = "󱓻",
+            bookmark = "",
+            modified = "",
+            hidden = "󱙝",
+            git = {
+              unstaged = "×",
+              staged = "",
+              unmerged = "󰧾",
+              untracked = "",
+              renamed = "",
+              deleted = "",
+              ignored = "∅",
             },
           },
         },
       },
       filters = {
-        dotfiles = false,
+        git_ignored = false,
+        dotfiles = true,
       },
+      hijack_cursor = true,
+      sync_root_with_cwd = true,
     }
   end,
 }
