@@ -80,6 +80,26 @@ M.ui = {
         end
         return "%#PmenuMatch# " .. harpoonline.format() .. " "
       end,
+
+      lsp = function()
+        if not rawget(vim, "lsp") then
+          return ""
+        end
+
+        local bufnr = vim.api.nvim_get_current_buf()
+
+        for _, client in ipairs(vim.lsp.get_clients()) do
+          if client.attached_buffers and client.attached_buffers[bufnr] then
+            if vim.o.columns > 100 then
+              return "  " .. client.name .. "  "
+            else
+              return "  "
+            end
+          end
+        end
+
+        return ""
+      end,
     },
   },
 }

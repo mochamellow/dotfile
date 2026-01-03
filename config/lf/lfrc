@@ -1,0 +1,91 @@
+set ratios 1:2:3:4
+set hidden
+set icons
+set preview
+set drawbox false
+# set info size:time
+
+set color256 true
+set promptfmt "\033[95;1m%d\033[0m \033[1m%f\033[0m"
+set cursoractivefmt "\033[1;90;21;37;7m"
+set cursorparentfmt "\033[1;1;7m"
+set cursorpreviewfmt ""
+set errorfmt "\033[31m%s\033[0m"
+
+# Jump to a directory using zoxide
+cmd z %{{
+    result="$(zoxide query --exclude "$PWD" "$@" | sed 's/\\/\\\\/g;s/"/\\"/g')"
+    lf -remote "send $id cd \"$result\""
+}}
+
+# Interactive directory selection with zoxide
+cmd zi ${{
+    result="$(zoxide query -i | sed 's/\\/\\\\/g;s/"/\\"/g')"
+    lf -remote "send $id cd \"$result\""
+}}
+
+# Track directories you visit in lf
+cmd on-cd &{{
+    zoxide add "$PWD"
+}}
+
+# Create new file
+cmd create_file %{{
+    printf "New File: "
+    read res
+    touch "$res"
+}}
+
+# Command to create a directory
+cmd create_dir %{{
+    printf "Folder Name: "
+    read name
+    [ -n "$name" ] && mkdir -p "$name"
+}}
+
+# Command to rename
+cmd rename_file %{{
+    printf "Rename to: "
+    read name
+    [ -n "$name" ] && mv "$f" "$name"
+}}
+
+# Delete with confirm
+cmd delete_with_confirm %{{
+    [ -z "$fx" ] && exit
+    
+    printf "Delete selected items? (y/N): "
+    read ans
+    [ "$ans" != "y" ] && exit
+    
+    IFS='
+'
+    for file in $fx; do
+        trash "$file"
+    done
+    lf -remote "send $id reload"
+}}
+
+
+map <enter> open
+
+# keybinds
+map a push :create_file<enter>
+map r push :rename_file<enter>
+map x cut
+
+# 'ctrl+n' for New Folder
+map N push :create_dir<enter>
+map <c-n> quit
+
+# 'z' for Zoxide (as per the official integration we added earlier)
+# This will trigger the command line where you can type the folder name
+map z push :z<space>
+
+# 'Z' (Shift+Z) for Interactive Zoxide (fzf search)
+map Z zi
+
+# Bind 'D' to move to macOS Trash
+map d : delete_with_confirm
+map w :
+

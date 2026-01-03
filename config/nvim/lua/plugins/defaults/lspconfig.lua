@@ -4,8 +4,13 @@ return {
     local nvchad_config = require "nvchad.configs.lspconfig"
 
     vim.filetype.add {
-      pattern = {
-        [".*%.component%.html"] = "htmlangular",
+      extension = {
+        html = function(path)
+          if path:match "%.component%.html$" or path:match "%.container%.html$" then
+            return "htmlangular"
+          end
+          return "html"
+        end,
       },
     }
 
@@ -42,8 +47,6 @@ return {
         buffer = bufnr,
         desc = "LSP Hover",
       })
-
-      -- other keybinds
 
       local map = function(mode, lhs, rhs, desc)
         vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, desc = desc, noremap = true, silent = true })
@@ -136,7 +139,6 @@ return {
         capabilities = nvchad_config.capabilities,
       }
 
-      -- Merge server-specific config if it exists
       if server_configs[server] then
         server_opts = vim.tbl_deep_extend("force", server_opts, server_configs[server])
       end
@@ -145,7 +147,7 @@ return {
       vim.lsp.enable(server)
     end
 
-    -- diagnostics & floating window config
+    -- diagnostics config
     vim.diagnostic.config {
       underline = true,
       virtual_text = false,
@@ -161,38 +163,24 @@ return {
       },
     }
 
+    -- Floating window styling (Border and focus behavior)
     vim.lsp.util.open_floating_preview = (function(orig)
-      return function(contents, syntax, opts, ...)
-        opts = opts or {}
-        opts.border = "rounded" -- Sets the border style for all LSP popups
-        opts.focusable = false -- CRITICAL: Prevents cursor jumps!
-        opts.close_events = { "bufleave", "cursormoved" }
-        return orig(contents, syntax, opts, ...)
+      return function(contents, syntax, float_opts, ...)
+        float_opts = float_opts or {}
+        float_opts.border = "rounded"
+        float_opts.focusable = false
+        float_opts.close_events = { "BufLeave", "CursorMoved", "InsertEnter" }
+        return orig(contents, syntax, float_opts, ...)
       end
     end)(vim.lsp.util.open_floating_preview)
 
-    -- Link the general floating window background and border
+    -- Highlight groups
     vim.api.nvim_set_hl(0, "NormalFloat", { link = "black2" })
     vim.api.nvim_set_hl(0, "FloatBorder", { link = "Special" })
-
-    -- Link the text inside the floating window
     vim.api.nvim_set_hl(0, "LspCodeLens", { link = "Comment" })
-
-    -- Link the currently active parameter to the selection color
-    -- We also add 'bold = true' to make it stand out more
     vim.api.nvim_set_hl(0, "LspSignatureActiveParameter", {
       link = "Visual",
-      bold = true, -- Still keeps the bold style
+      bold = true,
     })
-
-    vim.lsp.util.open_floating_preview = (function(orig)
-      return function(contents, syntax, opts, ...)
-        opts = opts or {}
-        opts.border = "double"
-        opts.focusable = false
-        opts.close_events = { "bufleave", "cursormoved" }
-        return orig(contents, syntax, opts, ...)
-      end
-    end)(vim.lsp.util.open_floating_preview)
   end,
 }

@@ -1,36 +1,35 @@
 return {
   "stevearc/conform.nvim",
-  event = "BufWritePre",
-  ---
+  event = { "BufWritePre" },
+  cmd = { "ConformInfo" },
+  keys = {
+    { "<leader>ci", "<cmd>ConformInfo<cr>", desc = "Conform Info" },
+  },
   opts = {
     formatters_by_ft = {
-      bash = { "shfmt" },
-      css = { "prettier" },
-      scss = { "prettier" },
-      html = { "prettier" },
-      angularhtml = { "prettier" },
-      javascript = { "prettier" },
-      javascriptreact = { "prettier" },
-      json = { "biome" },
-      markdown = { "markdownlint" },
-      python = { "ruff_format" },
-      typescript = { "prettier" },
-      typescriptreact = { "prettier" },
-      vue = { "prettier" },
+      css = { "prettierd" },
+      scss = { "prettierd" },
+      html = { "prettierd" },
+      htmlangular = { "prettierd" },
+      javascript = { "prettierd" },
+      typescript = { "prettierd" },
+      json = { "prettierd" },
+      jsonc = { "prettierd" },
       lua = { "stylua" },
-      yaml = { "yamlfmt" },
+      vue = { "prettierd" },
+      fish = { "fish_indent" },
+      sh = { "shfmt" },
+      bash = { "shfmt" },
+      markdown = { "cbfmt", "prettierd", "markdownlint" },
     },
-
-    format_on_save = function(bufnr)
-      -- Disable with a global or buffer-local variable
-      if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
-        return
-      end
-      return { timeout_ms = 5000, lsp_fallback = true }
-    end,
+    format_on_save = {
+      timeout_ms = 500,
+      lsp_fallback = true,
+    },
     formatters = {
-      yamlfmt = {
-        args = { "-formatter", "retain_line_breaks_single=true" },
+      prettierd = {
+        command = "/Users/gil/.local/share/nvim/mason/bin/prettierd",
+        args = { "--stdin-filepath", "$FILENAME" },
       },
     },
   },

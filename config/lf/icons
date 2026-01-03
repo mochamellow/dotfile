@@ -1,0 +1,45 @@
+
+# Core File Types
+di 󰉋# Directory
+fi # File
+ln # Link
+ex # Executable
+
+# Development & Code
+*.c 
+*.cpp 
+*.py 
+*.js 
+*.ts 
+*.html 
+*.css 
+*.md 󰎞
+*.json 
+*.sh  
+*.lua 
+*.rs 
+*.go 
+*.java 
+*.php 
+*.swift 󰛥
+
+# Configuration
+*.conf 
+*.yaml 
+*.yml 
+*.toml 
+*.ini 
+*.dockerfile  
+*Makefile 
+
+# Media & Documents
+*.jpg 
+*.png 
+*.gif 
+*.svg 
+*.mp3 
+*.mp4 
+*.pdf 
+*.zip 
+*.tar 
+*.7z 

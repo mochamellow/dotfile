@@ -81,7 +81,7 @@ return {
         frecency = {
           show_unindexed = true,
           workspace = "CWD",
-          db_safe_mode = false, -- disables popup
+          auto_validate = true,
         },
       },
     }, opts or {})

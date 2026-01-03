@@ -7,7 +7,7 @@ return {
   { import = "plugins.defaults.cmp" },
   { import = "plugins.defaults.base46" },
   { import = "plugins.defaults.nvim-tree" },
-  { import = "plugins.defaults.nvim-treesitter" },
+  -- { import = "plugins.defaults.nvim-treesitter" },
   { import = "plugins.defaults.nvim-colorizer" },
   { import = "plugins.defaults.nvim-web-devicons" },
   { import = "plugins.defaults.ui" },
@@ -30,7 +30,6 @@ return {
   { import = "plugins.package.glance" },
   { import = "plugins.package.tiny-inline-diagnostic" },
   { import = "plugins.package.diffview" },
-  { import = "plugins.package.better-escape" },
   { import = "plugins.package.dressing" },
   { import = "plugins.package.indent-scope" },
   { import = "plugins.package.smear-cursor" },
@@ -44,4 +43,5 @@ return {
   { import = "plugins.package.minty" },
   { import = "plugins.package.markview" },
   { import = "plugins.package.lf" },
+  { import = "plugins.package.mason-conform" },
 }

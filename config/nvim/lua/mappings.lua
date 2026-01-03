@@ -4,11 +4,19 @@ local map = vim.keymap.set
 
 -- Disabled nvimtreesitter for lf instead.
 map("n", "<C-n>", function()
-  local dir = vim.fn.expand "%:p:h"
-  if vim.fn.isdirectory(dir) == 0 then
+  local buf = vim.api.nvim_buf_get_name(0)
+  local dir
+
+  if buf == "" then
     dir = vim.fn.getcwd()
+  else
+    dir = vim.fn.fnamemodify(buf, ":p:h")
+    if vim.fn.isdirectory(dir) == 0 then
+      dir = vim.fn.getcwd()
+    end
   end
-  require("lf").start { dir = dir }
+
+  require("lf").start(dir)
 end, { desc = "Toggle lf" })
 
 map("i", "<Del>", "<C-o>x", { noremap = true, desc = "Delete char under cursor" })

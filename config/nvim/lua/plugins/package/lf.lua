@@ -9,7 +9,6 @@ return {
     require("lf").setup {
       default_action = "drop",
       winblend = 0,
-      dir = "",
       direction = "horizontal",
       border = "double",
       height = fn.float2nr(fn.round(0.75 * o.lines)),
