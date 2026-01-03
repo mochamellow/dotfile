@@ -42,7 +42,6 @@ alias gb "git branch"
 
 set -gx LS_COLORS "di=97"
 
-
 # keybind lfcd
 function lfcd
     set tmp (mktemp)
@@ -65,3 +64,5 @@ end
 # Key bindings
 bind \cn __lfcd_keybind
 bind -M insert \cn __lfcd_keybind
+
+keybind = super+v=paste

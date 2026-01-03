@@ -1,7 +1,7 @@
 set ratios 1:2:3:4
 set hidden
 set icons
-set preview
+set preview true
 set drawbox false
 # set info size:time
 
@@ -12,6 +12,15 @@ set cursorparentfmt "\033[1;1;7m"
 set cursorpreviewfmt ""
 set errorfmt "\033[31m%s\033[0m"
 
+#Integrations
+set sixel false
+set previewer ctpv
+set cleaner ctpvclear
+&ctpv -s $id
+&ctpvquit $id
+
+
+# Command Integrations
 # Jump to a directory using zoxide
 cmd z %{{
     result="$(zoxide query --exclude "$PWD" "$@" | sed 's/\\/\\\\/g;s/"/\\"/g')"
@@ -67,9 +76,9 @@ cmd delete_with_confirm %{{
 }}
 
 
+# keybinds
 map <enter> open
 
-# keybinds
 map a push :create_file<enter>
 map r push :rename_file<enter>
 map x cut

@@ -6,7 +6,6 @@ echo "🚀 Setting up dotfiles..."
 
 # Create necessary directories
 mkdir -p ~/.config
-mkdir -p ~/.nvim/undodir
 
 # Function to backup existing configs
 backup_if_exists() {
@@ -27,7 +26,7 @@ for config in config/*; do
     fi
 done
 
-# Install home directory files  
+# Install home directory files
 echo "🏠 Installing home directory files..."
 for file in home/.*; do
     if [ -f "$file" ]; then
