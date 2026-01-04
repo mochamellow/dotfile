@@ -16,7 +16,8 @@ map("n", "<C-n>", function()
     end
   end
 
-  require("lf").start(dir)
+  -- pass a table with `dir` key
+  require("lf").start { dir = dir }
 end, { desc = "Toggle lf" })
 
 map("i", "<Del>", "<C-o>x", { noremap = true, desc = "Delete char under cursor" })

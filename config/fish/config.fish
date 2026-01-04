@@ -64,5 +64,3 @@ end
 # Key bindings
 bind \cn __lfcd_keybind
 bind -M insert \cn __lfcd_keybind
-
-keybind = super+v=paste
