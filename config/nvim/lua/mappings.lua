@@ -2,6 +2,26 @@ require "nvchad.mappings"
 
 local map = vim.keymap.set
 
+-- Remove ALL default NvimTree keymaps from NvChad
+vim.keymap.del("n", "<leader>e")
+vim.keymap.del("n", "<C-n>")
+vim.keymap.del("n", "<leader>gt")
+vim.keymap.del("n", "<leader>pt")
+vim.keymap.del("n", "<leader>cm")
+vim.keymap.del("n", "<leader>ds")
+vim.keymap.del("n", "<leader>fm")
+vim.keymap.del("n", "<leader>fo")
+vim.keymap.del("n", "<leader>fb")
+vim.keymap.del("n", "<leader>tl")
+vim.keymap.del("n", "<leader>tL")
+vim.keymap.del("n", "<leader>to")
+
+-- Diffview close
+vim.keymap.del("n", "<leader>dc")
+
+-- Diffview open
+vim.keymap.del("n", "<leader>dv")
+
 -- Disabled nvimtreesitter for lf instead.
 map("n", "<C-n>", function()
   local buf = vim.api.nvim_buf_get_name(0)

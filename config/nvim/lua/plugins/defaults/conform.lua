@@ -9,7 +9,7 @@ return {
     formatters_by_ft = {
       css = { "prettierd" },
       scss = { "prettierd" },
-      html = { "prettierd" },
+      html = { "lsp" },
       htmlangular = { "prettierd" },
       javascript = { "prettierd" },
       typescript = { "prettierd" },
@@ -22,10 +22,21 @@ return {
       bash = { "shfmt" },
       markdown = { "cbfmt", "prettierd", "markdownlint" },
     },
-    format_on_save = {
-      timeout_ms = 500,
-      lsp_fallback = true,
-    },
+    format_on_save = function(bufnr)
+      local ft = vim.bo[bufnr].filetype
+
+      if ft == "htmlangular" then
+        return {
+          timeout_ms = 500,
+          lsp_fallback = false, -- 👈 CRITICAL
+        }
+      end
+
+      return {
+        timeout_ms = 500,
+        lsp_fallback = true,
+      }
+    end,
     formatters = {
       prettierd = {
         command = "/Users/gil/.local/share/nvim/mason/bin/prettierd",

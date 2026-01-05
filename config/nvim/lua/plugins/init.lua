@@ -44,4 +44,5 @@ return {
   { import = "plugins.package.markview" },
   { import = "plugins.package.lf" },
   { import = "plugins.package.mason-conform" },
+  -- { import = "plugins.package.xcodebuild" },
 }
