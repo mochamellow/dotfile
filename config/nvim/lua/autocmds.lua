@@ -2,6 +2,10 @@ require "nvchad.autocmds"
 
 local autocmd = vim.api.nvim_create_autocmd
 
+-- Undercurl
+vim.cmd [[let &t_Cs = "\e[4:3m"]]
+vim.cmd [[let &t_Ce = "\e[4:0m"]]
+
 autocmd("ExitPre", {
   pattern = "*",
   callback = function()
@@ -10,5 +14,15 @@ autocmd("ExitPre", {
         vim.api.nvim_buf_delete(buf, { force = true })
       end
     end
+  end,
+})
+
+vim.api.nvim_create_autocmd("ColorScheme", {
+  callback = function()
+    local link = vim.api.nvim_get_hl(0, { name = "Special" })
+    vim.api.nvim_set_hl(0, "CursorLineNr", {
+      fg = link.fg,
+      bold = true,
+    })
   end,
 })

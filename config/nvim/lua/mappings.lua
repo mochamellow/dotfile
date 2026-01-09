@@ -12,9 +12,6 @@ vim.keymap.del("n", "<leader>ds")
 vim.keymap.del("n", "<leader>fm")
 vim.keymap.del("n", "<leader>fo")
 vim.keymap.del("n", "<leader>fb")
-vim.keymap.del("n", "<leader>tl")
-vim.keymap.del("n", "<leader>tL")
-vim.keymap.del("n", "<leader>to")
 
 -- Diffview close
 vim.keymap.del("n", "<leader>dc")

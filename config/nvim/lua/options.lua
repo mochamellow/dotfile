@@ -32,7 +32,3 @@ o.indentexpr = "" -- Disable expression-based indenting
 
 -- Minimal indent triggers - let guess-indent do the work
 o.indentkeys = "" -- Disable automatic re-indenting
-
--- Undercurl
-vim.cmd [[let &t_Cs = "\e[4:3m"]]
-vim.cmd [[let &t_Ce = "\e[4:0m"]]

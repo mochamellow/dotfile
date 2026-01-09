@@ -6,6 +6,10 @@ return {
     "nvim-telescope/telescope-frecency.nvim",
     "kkharji/sqlite.lua",
     "j-hui/fidget.nvim",
+    {
+      "jradam/todo-comments.nvim",
+      branch = "telescope-filename-option",
+    },
   },
   keys = {
     { "<leader><leader>", desc = "Search" },
@@ -13,6 +17,7 @@ return {
     { "<leader>fa", desc = "Search all files" },
     { "<leader>fw", desc = "Live Grep" },
     { "<leader>fn", desc = "Telescope Notifications" },
+    { "<leader>ft", desc = "Todo Telescope" },
     { "<C-f>", desc = "Live Grep in current buffer" },
   },
 
@@ -25,8 +30,6 @@ return {
     local telescope_theme = require "toki.telescope-theme"
 
     telescope_theme.apply()
-    telescope.load_extension "frecency"
-    telescope.load_extension "fidget"
 
     local frecency = telescope.extensions.frecency
     local map = vim.keymap.set
@@ -42,20 +45,16 @@ return {
           path = vim.fn.stdpath "data" .. "/telescope_history.sqlite3",
           limit = 100,
         },
-        preview = { hide_on_startup = true },
+        preview = {
+          hide_on_startup = true,
+          treesitter = true,
+          enable_highlight = true,
+        },
         results_title = false,
         selection_caret = " ",
         entry_prefix = " ",
         file_ignore_patterns = { "node_modules" },
-        path_display = function(_, path)
-          local cwd = vim.loop.cwd() .. "/"
-          path = path:gsub("^" .. vim.pesc(cwd), "")
-          local parts = vim.split(path, "/", { trimempty = true })
-          if #parts <= 4 then
-            return path
-          end
-          return string.format("%s/%s/.../%s/%s", parts[1], parts[2], parts[#parts - 1], parts[#parts])
-        end,
+        path_display = { "smart" },
         layout_strategy = "vertical",
         layout_config = {
           vertical = {
@@ -122,7 +121,11 @@ return {
 
     -- Live grep
     map("n", "<leader>fw", function()
-      builtin.live_grep()
+      builtin.live_grep {
+        additional_args = function()
+          return { "--color=always" }
+        end,
+      }
     end, { desc = "Live Grep" })
 
     -- Buffers
@@ -132,21 +135,30 @@ return {
 
     -- Search in current buffer
     map("n", "<C-f>", function()
-      require("telescope.builtin").current_buffer_fuzzy_find {
-        -- previewer = true,
-        -- layout_strategy = "vertical",
-        -- layout_config = {
-        --   vertical = {
-        --     width = SIZES.WIDTH,
-        --     height = 25,
-        --   },
-        -- },
-      }
+      require("telescope.builtin").current_buffer_fuzzy_find {}
     end, { desc = "Fuzzy find in current buffer" })
 
     -- notify in telescope
     map("n", "<leader>fn", function()
       telescope.extensions.fidget.fidget()
     end, { desc = "Notifications" })
+
+    -- todo in telescope
+    map("n", "<leader>ft", function()
+      require("telescope").extensions["todo-comments"].todo {
+        layout_strategy = "vertical",
+        layout_config = {
+          width = 0.6,
+          height = 0.8,
+          preview_height = 0.6,
+        },
+        preview = {
+          hide_on_startup = false,
+        },
+        path = false,
+        -- path = "name",
+        -- position = false,
+      }
+    end, { desc = "Todo Telescope" })
   end,
 }

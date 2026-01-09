@@ -10,13 +10,23 @@ theme = bearded-arc
 # custom-shader = ghostty-shaders/retro-terminal.glsl
 # custom-shader = ghostty-shaders/starfield.glsl
 
-
 font-family = "Maple Mono"
-font-family-italic = "Monaspace Radon"
-font-family-bold = "JetBrains Mono NL"
-font-family-bold-italic = "Maple Mono"
+font-style = "Medium"
+font-style-italic = "Medium Italic"
+font-style-bold = "Bold"
+font-style-bold-italic = "Bold Italic"
+
 font-size = 13
-font-feature = -calt,liga,-dlig
+font-feature = "calt"
+font-feature = "liga"
+font-feature = "ss01"
+
+# font-family = "Iosevka"
+# font-style = Medium
+# font-style-bold = Bold
+# font-style-italic = Medium Italic
+# font-style-bold-italic = Bold Italic
+# font-size = 15
 
 # font-family = "Monaspace Neon, Monaspace Radon"
 # background-blur-radius = 40

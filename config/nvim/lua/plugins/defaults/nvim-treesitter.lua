@@ -5,6 +5,7 @@ return {
     ensure_installed = {
       "bash",
       "css",
+      "scss",
       "html",
       "http",
       "javascript",
@@ -13,15 +14,14 @@ return {
       "luadoc",
       "markdown",
       "markdown_inline",
-      "scss",
       "tsx",
       "typescript",
       "vim",
       "vimdoc",
       "yaml",
     },
-    indent = { enable = false },
-    highlight = { enable = false },
+    indent = { enable = true },
+    highlight = { enable = true },
     incremental_selection = {
       enable = true,
       keymaps = {

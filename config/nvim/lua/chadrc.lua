@@ -6,16 +6,56 @@ M.base46 = {
 
   hl_override = {
     Comment = { italic = true },
-    ["@comment"] = { italic = true },
     Conditional = { italic = true },
     Repeat = { italic = true },
     Function = { bold = true },
-    ["@function"] = { bold = true },
     Keyword = { bold = true },
-    ["@keyword"] = { bold = true },
     Type = { bold = true },
-    ["@type"] = { bold = true },
+    CursorLineNr = {
+      fg = "green",
+      bold = true,
+    },
     NvDashAscii = { link = "Special" },
+
+    -- Keywords
+    ["@comment"] = { italic = true },
+    ["@keyword"] = { bold = true },
+    ["@keyword.conditional"] = { italic = true },
+    ["@keyword.repeat"] = { italic = true },
+    ["@keyword.return"] = { italic = true },
+    ["@keyword.operator"] = { italic = true },
+    ["@keyword.import"] = { italic = true },
+    ["@keyword.exception"] = { italic = true },
+    ["@keyword.modifier"] = { italic = true },
+    ["@keyword.directive"] = { italic = true },
+
+    -- Language Specific
+    ["@keyword.angular"] = { italic = true },
+    ["@keyword.typescript"] = { italic = true },
+
+    -- Types
+    ["@type"] = { bold = true },
+    ["@type.builtin"] = { italic = true },
+    ["@type.definition"] = { bold = true },
+
+    -- Functions / methods
+    ["@function"] = { bold = true },
+    ["@function.call"] = { bold = true },
+    ["@function.builtin"] = { italic = true, force = true },
+    ["@function.call.typescript"] = { italic = true },
+    ["@lsp.type.function.typescript"] = { italic = true, force = true },
+
+    ["@method"] = { bold = true },
+    ["@method.call"] = { bold = true },
+
+    -- Variables / constants
+    ["@variable.builtin"] = { italic = true },
+    ["@variable.typescript"] = { italic = true },
+    ["@constant"] = { bold = true },
+    ["@constant.builtin"] = { italic = true },
+
+    -- Preprocessor
+    ["@preproc"] = { italic = true },
 
     integrations = {
       "blankline",

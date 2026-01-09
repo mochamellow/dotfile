@@ -16,9 +16,4 @@ set -g @tmux-dotbar-fg-current "#EACD61"
 set -g @tmux-dotbar-fg-session "#c3cfd9"
 set -g @tmux-dotbar-fg-prefix "#3CEC85"   
 
-set -g @tmux-dotbar-window-status-format " #W "
-set -g @tmux-dotbar-window-status-separator " • "
-set -g @tmux-dotbar-position top
-set -g @tmux-dotbar-right true
-
 run '~/.tmux/plugins/tmux-dotbar/dotbar.tmux'
