@@ -121,11 +121,7 @@ return {
 
     -- Live grep
     map("n", "<leader>fw", function()
-      builtin.live_grep {
-        additional_args = function()
-          return { "--color=always" }
-        end,
-      }
+      builtin.live_grep()
     end, { desc = "Live Grep" })
 
     -- Buffers

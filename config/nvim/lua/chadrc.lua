@@ -12,7 +12,7 @@ M.base46 = {
     Keyword = { bold = true },
     Type = { bold = true },
     CursorLineNr = {
-      fg = "green",
+      fg = "orange",
       bold = true,
     },
     NvDashAscii = { link = "Special" },
