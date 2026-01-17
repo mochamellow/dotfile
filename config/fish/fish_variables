@@ -22,7 +22,6 @@ SETUVAR _fisher_upgraded_to_4_4:\x1d
 SETUVAR fish_color_autosuggestion:brblack
 SETUVAR fish_color_command:magenta\x1e\x2d\x2dbold
 SETUVAR fish_greeting:
-SETUVAR fish_key_bindings:fish_default_key_bindings
 SETUVAR sponge_allow_previously_successful:true
 SETUVAR sponge_delay:2
 SETUVAR sponge_filters:sponge_filter_failed\x1esponge_filter_matched

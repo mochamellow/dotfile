@@ -80,6 +80,7 @@ return {
       "tailwindcss",
       "ts_ls",
       "angularls",
+      "sourcekit",
       "emmet_ls",
     }
 
@@ -91,6 +92,20 @@ return {
 
     -- Server-specific configurations
     local server_configs = {
+      sourcekit = {
+        cmd = { "xcrun", "sourcekit-lsp" },
+        -- 0.11 native API uses 'root_markers' for automatic detection
+        root_markers = { "Package.swift", ".git", "buildServer.json", "compile_commands.json" },
+        filetypes = { "swift", "objc", "objcpp" },
+        initializationOptions = {
+          fallbackFlags = {
+            "-target",
+            "arm64-apple-ios17.0-simulator",
+            "-sdk",
+            "/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk",
+          },
+        },
+      },
       cssls = {
         settings = {
           css = { lint = { unknownAtRules = "ignore" } },

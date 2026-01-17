@@ -11,7 +11,7 @@ theme = bearded-arc
 # custom-shader = ghostty-shaders/starfield.glsl
 
 font-family = "Maple Mono"
-font-style = "Medium"
+font-style = "Regular"
 font-style-italic = "Medium Italic"
 font-style-bold = "Bold"
 font-style-bold-italic = "Bold Italic"

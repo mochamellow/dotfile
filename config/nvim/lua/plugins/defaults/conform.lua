@@ -20,6 +20,7 @@ return {
       fish = { "fish_indent" },
       sh = { "shfmt" },
       bash = { "shfmt" },
+      swift = { "swiftformat" },
       markdown = { "cbfmt", "prettierd", "markdownlint" },
     },
     format_on_save = function(bufnr)

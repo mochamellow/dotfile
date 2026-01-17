@@ -130,6 +130,8 @@ return {
           disable_cmp_and_delete(fallback)
         end, { "i", "s" }),
 
+        ["<C-Space>"] = cmp.mapping.complete(),
+
         -- Scroll documentation window
         ["<C-d>"] = cmp.mapping.scroll_docs(4), -- Scroll down
         ["<C-u>"] = cmp.mapping.scroll_docs(-4), -- Scroll up
