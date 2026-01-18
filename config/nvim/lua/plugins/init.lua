@@ -20,6 +20,7 @@ return {
   { import = "plugins.package.persistence" },
   { import = "plugins.package.harpoon" },
   { import = "plugins.package.lsp-signature" },
+  { import = "plugins.package.dap" },
   { import = "plugins.package.dap-ui" },
   { import = "plugins.package.dap-virtual-text" },
   { import = "plugins.package.rainbow-delimiters" },
@@ -46,4 +47,6 @@ return {
   { import = "plugins.package.mason-conform" },
   { import = "plugins.package.swift" },
   { import = "plugins.package.xcodebuild" },
+  { import = "plugins.package.nvim-lint" },
+  { import = "plugins.package.toggleterm" },
 }

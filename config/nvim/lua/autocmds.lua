@@ -17,12 +17,15 @@ autocmd("ExitPre", {
   end,
 })
 
-vim.api.nvim_create_autocmd("ColorScheme", {
-  callback = function()
-    local link = vim.api.nvim_get_hl(0, { name = "Special" })
-    vim.api.nvim_set_hl(0, "CursorLineNr", {
-      fg = link.fg,
-      bold = true,
-    })
-  end,
+-- CUSTOMIZATIONS
+local ok, base46 = pcall(require, "base46")
+if not ok then
+  return
+end
+
+local colors = base46.get_theme_tb "base_30"
+
+vim.api.nvim_set_hl(0, "FloatTitle", {
+  fg = "NONE",
+  bg = colors.black,
 })

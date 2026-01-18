@@ -1,7 +1,5 @@
 require "nvchad.options"
 
--- add yours here!
-
 local o = vim.o
 -- o.cursorlineopt = "both" -- to enable cursorline!
 
@@ -32,3 +30,4 @@ o.indentexpr = "" -- Disable expression-based indenting
 
 -- Minimal indent triggers - let guess-indent do the work
 o.indentkeys = "" -- Disable automatic re-indenting
+o.termguicolors = true

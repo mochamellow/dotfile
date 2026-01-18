@@ -1,8 +1,9 @@
-set ratios 1:2:3:4
+set ratios 1:2:3
 set hidden
 set icons
 set preview true
 set drawbox false
+set noheader
 # set info size:time
 
 set color256 true

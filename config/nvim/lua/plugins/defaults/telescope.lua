@@ -35,7 +35,7 @@ return {
     local map = vim.keymap.set
 
     local SIZES = {
-      WIDTH = 0.35,
+      WIDTH = 0.45,
       HEIGHT = 0.5,
     }
 

@@ -1,16 +1,43 @@
 return {
   "rcarriga/nvim-dap-ui",
-  event = "LspAttach",
   dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
-  opts = {},
+  event = "LspAttach",
   config = function()
-    local map = vim.keymap.set
-    local dap = require "dap"
-    local dapui = require "dapui"
-    local widgets = require "dap.ui.widgets"
-    local sidebar = widgets.sidebar(widgets.scopes)
+    require("dapui").setup {
+      controls = {
+        element = "repl",
+        enabled = true,
+      },
+      floating = {
+        border = "single",
+        mappings = {
+          close = { "q", "<Esc>" },
+        },
+      },
+      icons = { collapsed = "", expanded = "", current_frame = "" },
+      layouts = {
+        -- {
+        --   elements = {
+        --     { id = "stacks", size = 0.25 },
+        --     { id = "scopes", size = 0.25 },
+        --     { id = "breakpoints", size = 0.25 },
+        --     { id = "watches", size = 0.25 },
+        --   },
+        --   position = "left",
+        --   size = 60,
+        -- },
+        {
+          elements = {
+            { id = "repl", size = 0.35 },
+            { id = "console", size = 0.65 },
+          },
+          position = "bottom",
+          size = 10,
+        },
+      },
+    }
 
-    dapui.setup()
+    local dap, dapui = require "dap", require "dapui"
 
     dap.listeners.after.event_initialized["dapui_config"] = function()
       dapui.open()
