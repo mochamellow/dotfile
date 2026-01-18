@@ -41,6 +41,25 @@ for file in "${home_files[@]}"; do
     fi
 done
 
+# Update LazyGit config
+echo "📂 Updating Application Support config..."
+app_support_files=(
+    "lazygit"
+)
+
+for file in "${app_support_files[@]}"; do
+    SRC="$HOME/Library/Application Support/$file"
+    DEST="Application Support/$file" # keeps original structure in your repo
+
+    if [ -d "$SRC" ]; then
+        mkdir -p "$DEST"
+        echo "  📋 Copying $file"
+        cp -r "$SRC"/* "$DEST"/
+    else
+        echo "  ⚠️  $file not found at $SRC, skipping"
+    fi
+done
+
 echo ""
 echo "✅ Dotfiles updated!"
 echo ""

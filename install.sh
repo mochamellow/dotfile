@@ -37,6 +37,19 @@ for file in home/.*; do
     fi
 done
 
+# Install Application Support configs
+echo "📂 Installing Application Support configs..."
+for app in "Application Support/"*; do
+    if [ -d "$app" ]; then
+        app_name=$(basename "$app")
+        DEST="$HOME/Library/Application Support/$app_name"
+        backup_if_exists "$DEST"
+        mkdir -p "$DEST"
+        cp -r "$app"/* "$DEST"/
+        echo "  ✅ Installed $app_name"
+    fi
+done
+
 echo ""
 echo "🎉 Dotfiles installation complete!"
 echo ""
